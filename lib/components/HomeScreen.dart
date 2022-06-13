@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:e_balbharati/components/BookListPage.dart';
 import 'package:flutter/material.dart';
 
 class Classes {
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>BookListPage(classVal:myClasses[index].classValue )));
                   print(myClasses[index].classValue);
                 },
                 child: Container(
