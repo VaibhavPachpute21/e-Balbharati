@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:e_balbharati/components/BookPDFViewPage.dart';
 import 'package:e_balbharati/modules/EBooksDataModule.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -52,8 +53,8 @@ class _BookListPageState extends State<BookListPage> {
           builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
             if (snapshot.hasData) {
               return Container(
-                child: bookCard(
-                    snapshot), //Text(snapshot.data!.length.toString()),
+                padding: EdgeInsets.only(top: 5, bottom: 5),
+                child: bookCard(snapshot),
               );
             } else if (snapshot.hasError) {
               return Container(
@@ -74,29 +75,44 @@ class _BookListPageState extends State<BookListPage> {
         itemCount: booksData.data.length,
         itemBuilder: (ctx, i) {
           return InkWell(
-            highlightColor: Colors.amber,
-            focusColor: Colors.amber,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(2),
-                    padding: EdgeInsets.all(2),
-                    height: 290,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(2),
-                        image:DecorationImage(image: NetworkImage(booksData.data[i].bookCover),fit: BoxFit.fitWidth )
-                        ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BookPDFView(
+                            bookLink: booksData.data[i].link,
+                            title: booksData.data[i].bookName,
+                          )));
+            },
+            child: Container(
+              margin: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                  color: Colors.black12,
+                  border: Border.all(color: Colors.amber)),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      height: 300,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(booksData.data[i].bookCover),
+                              fit: BoxFit.cover)),
+                    ),
                   ),
-                ),
-                Text(
-                        booksData.data[i].bookName,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      booksData.data[i].bookName,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
                       ),
-              ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
