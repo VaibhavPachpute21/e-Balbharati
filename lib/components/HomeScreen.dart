@@ -37,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text("ई-बालभारती",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-          bottom: PreferredSize(
-            child: Container(
-              child: Text("कृपया आपली इयत्ता निवडा",style: TextStyle(fontSize: 18 ),),
-            ),
-            preferredSize: Size(50, 15),
-           ),
+          // bottom: PreferredSize(
+          //   child: Container(
+          //     child: Text("कृपया आपली इयत्ता निवडा",style: TextStyle(fontSize: 18 ),),
+          //   ),
+          //   preferredSize: Size(50, 15),
+          //  ),
         ),
         body: ListView.builder(
             itemCount: myClasses.length,

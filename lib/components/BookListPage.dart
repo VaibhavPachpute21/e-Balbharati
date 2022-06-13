@@ -6,6 +6,7 @@ import 'package:e_balbharati/components/BookPDFViewPage.dart';
 import 'package:e_balbharati/modules/EBooksDataModule.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shimmer/shimmer.dart';
 
 class BookListPage extends StatefulWidget {
   final String classVal;
@@ -16,6 +17,8 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
+  int timer = 800, offset = 0;
+
   Future<List<Marathi>> loadData() async {
     List<Marathi> eBooks;
     String server =
@@ -38,15 +41,6 @@ class _BookListPageState extends State<BookListPage> {
           "ई-बालभारती",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
-        // bottom: PreferredSize(
-        //   child: Container(
-        //     child: const Text(
-        //       "कृपया आपली इयत्ता निवडा",
-        //       style: TextStyle(fontSize: 18),
-        //     ),
-        //   ),
-        //   preferredSize: const Size(50, 15),
-        // ),
       ),
       body: FutureBuilder(
           future: loadData(),
@@ -61,9 +55,39 @@ class _BookListPageState extends State<BookListPage> {
                 child: Text(snapshot.error.toString()),
               );
             } else {
-              return CircularProgressIndicator();
+              return loadingWidget();
             }
           }),
+    );
+  }
+
+  Widget loadingWidget() {
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200, crossAxisSpacing: 20, mainAxisSpacing: 20),
+        itemCount: 8,
+        itemBuilder: (BuildContext ctx, index) {
+          offset += 50;
+          timer = 800 + offset;
+          print(timer);
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.white,
+              period: Duration(milliseconds: timer),
+              child: box(),
+            ),
+          );
+        });
+  }
+
+  Widget box() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      height: 300,
+      width: 100,
+      color: Colors.grey,
     );
   }
 
