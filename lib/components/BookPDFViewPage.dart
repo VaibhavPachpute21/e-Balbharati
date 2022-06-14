@@ -29,7 +29,9 @@ class _BookPDFViewState extends State<BookPDFView> {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
-      body: SfPdfViewer.network(widget.bookLink,),
+      body: SfPdfViewer.network(
+        widget.bookLink,
+      ),
     );
   }
 }

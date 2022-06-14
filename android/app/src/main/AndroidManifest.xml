@@ -2,7 +2,7 @@
     package="com.example.e_balbharati">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="मराठी ई-बालभारती"
+        android:label="मराठी ई-बालभारती पुस्तके"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

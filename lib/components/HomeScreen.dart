@@ -36,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("ई-बालभारती",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+          title: Text(
+            "ई-बालभारती",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
           // bottom: PreferredSize(
           //   child: Container(
           //     child: Text("कृपया आपली इयत्ता निवडा",style: TextStyle(fontSize: 18 ),),
@@ -48,8 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: myClasses.length,
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>BookListPage(classVal:myClasses[index].classValue )));
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BookListPage(
+                              classVal: myClasses[index].classValue)));
                   print(myClasses[index].classValue);
                 },
                 child: Container(

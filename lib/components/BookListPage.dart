@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:e_balbharati/components/BookPDFViewPage.dart';
+import 'package:e_balbharati/components/errorPage.dart';
 import 'package:e_balbharati/modules/EBooksDataModule.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,10 +22,7 @@ class _BookListPageState extends State<BookListPage> {
 
   Future<List<Marathi>> loadData() async {
     List<Marathi> eBooks;
-    String server =
-        "https://e-balbharati-default-rtdb.firebaseio.com/e-Balbharati/" +
-            "${widget.classVal}" +
-            "/marathi.json";
+    String server ="https://e-balbharati-default-rtdb.firebaseio.com/e-Balbharati/" +"${widget.classVal}" +"/marathi.json";
     var res = await http.get(Uri.parse(server));
     var data = jsonDecode(res.body);
     eBooks = data.map<Marathi>((json) => Marathi.fromJson(json)).toList();
@@ -52,7 +50,7 @@ class _BookListPageState extends State<BookListPage> {
               );
             } else if (snapshot.hasError) {
               return Container(
-                child: Text(snapshot.error.toString()),
+                child: ErrorPage(),
               );
             } else {
               return loadingWidget();
